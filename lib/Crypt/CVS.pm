@@ -70,7 +70,44 @@ Crypt::CVS - Substitution cipher for CVS passwords
 =head1 DESCRIPTION
 
 The CVS protocol uses a substitution cipher for passwords going over
-the wire.
+the wire. From F<src/scramble.c> in GNU CVS's source distribution:
+
+    Trivially encode strings to protect them from innocent eyes (i.e.,
+    inadvertent password compromises, like a network administrator
+    who's watching packets for legitimate reasons and accidentally sees
+    the password protocol go by.
+
+About the encoding:
+
+    Map characters to each other randomly and symmetrically, A <--> B.
+
+    We divide the ASCII character set into 3 domains: control chars (0
+    thru 31), printing chars (32 through 126), and "meta"-chars (127
+    through 255).  The control chars map _to_ themselves, the printing
+    chars map _among_ themselves, and the meta chars map _among_
+    themselves.  Why is this thus?
+
+    No character in any of these domains maps to a character in another
+    domain, because I'm not sure what characters are valid in
+    passwords, or what tools people are likely to use to cut and paste
+    them.  It seems prudent not to introduce control or meta chars,
+    unless the user introduced them first.  And having the control
+    chars all map to themselves insures that newline and
+    carriage-return are safely handled.
+
+=head1 FUNCTIONS
+
+=head1 scramble($plaintext)
+
+Takes plaintext and returns a scrambled version of it. The first byte
+of the scrambled string is a single letter indicating the scrambling
+method. This has always been C<"A">, it's very unlikely that there'll
+ever be another scrambling method.
+
+=head1 unscramble($scrambled)
+
+Takes a scrambled string and returns an unscrambled version. Dies if
+the first letter isn't C<"A">.
 
 =head1 AUTHOR
 
