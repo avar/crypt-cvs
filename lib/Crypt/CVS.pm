@@ -2,7 +2,7 @@ package Crypt::CVS;
 
 use strict;
 use warnings;
-use Exporter 'import';
+use base 'Exporter';
 
 our @EXPORT    = ();
 our @EXPORT_OK = qw(scramble descramble);
