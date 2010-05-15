@@ -109,6 +109,11 @@ ever be another scrambling method.
 Takes a scrambled string and returns an unscrambled version. Dies if
 the first letter isn't C<"A">.
 
+=head1 EXPORTS
+
+The functions L</scramble> and L</descramble> can be optionally
+exported. C<use Crypt::CVS ':all'> exports both of them.
+
 =head1 AUTHOR
 
 E<AElig>var ArnfjE<ouml>rE<eth> Bjarmason <avar@cpan.org>
