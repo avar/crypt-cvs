@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 2 + 1 + 10_000 * 3;
+use Test::More tests => 2 + 1 + 1_000 * 3;
 use Crypt::CVS qw(:all);
 
 my %sanity = (
@@ -24,7 +24,7 @@ while (my ($k, $v) = each %sanity) {
     is_deeply(\@same, [ 1 .. 9, 11 .. 31, 113, 192 ], "some characters substitute to themselves");
 }
 
-for my $str (map { random_string() } 1 .. 10_000) {
+for my $str (map { random_string() } 1 .. 1_000) {
     my $scrambled = scramble($str);
     my $descrambled = descramble($scrambled);
 
