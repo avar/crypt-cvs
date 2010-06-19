@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 2 + 1 + 1_000 * 3;
+use Test::More tests => 2 + 1 + (1_000 * 3) + (26 * 2 + 10);
 use Crypt::CVS qw(:all);
 
 my %sanity = (
@@ -36,6 +36,17 @@ for my $str (map { random_string() } 1 .. 1_000) {
         isnt $y, $str, "scramble('$str') != '$y'";
     }
     is $descrambled, $str, "descramble(scramble('$str') = '$str'";
+}
+
+# Invalid password formats
+for my $chr ("A" .. "Z", "a" .. "z", 0 .. 9) {
+    local $@;
+    eval { descramble("${chr}foobar") };
+    if ($chr eq 'A') {
+        is $@, '', "A is a valid password format";
+    } else {
+        like $@, qr/invalid password format `$chr'/, "$chr isn't a valid password format";
+    }
 }
 
 sub random_string
