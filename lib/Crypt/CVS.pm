@@ -41,7 +41,7 @@ sub descramble
 {
     my ($str) = @_;
 
-    # This should never happen, the same password format (A) bas been
+    # This should never happen, the same password format (A) has been
     # used by CVS since the beginning of time
     {
         my $fmt = substr($str, 0, 1);
