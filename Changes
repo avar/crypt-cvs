@@ -2,6 +2,8 @@ Revision history for Crypt::CVS
 
 {{$NEXT}}
 
+0.03 2010-07-06 18:14:36
+
     - The module name in Changes / SYNOPSIS was CVS::Password, not
       Crypt::CVS
 
