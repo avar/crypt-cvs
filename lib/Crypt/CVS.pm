@@ -63,7 +63,7 @@ Crypt::CVS - Substitution cipher for CVS passwords
 
 =head1 SYNOPSIS
 
-    use CVS::Password qw(:all);
+    use Crypt::CVS qw(:all);
 
     # AE00uy
     my $scrambled = scramble "foobar";
